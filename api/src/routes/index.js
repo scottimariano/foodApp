@@ -15,7 +15,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get('/', async (req, res) => {
+router.get('', async (req, res) => {
 	let allRecipes = [];
 	try {
 		Promise.all([
