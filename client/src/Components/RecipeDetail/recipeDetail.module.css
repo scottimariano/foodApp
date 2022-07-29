@@ -1,0 +1,158 @@
+.canvas {
+	background-color: #fff;
+	display: flex;
+	flex-flow: column;
+	align-items: flex-start;
+	background-image: url('../../media/vecteezy_kitchen-utensils-tools-and-dishware-on-on-the-background-white-tile-wall_2786411.jpg');
+	background-size: 100vw;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.container > section {
+	border: solid red 1px;
+}
+
+.navBar {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	width: 95vw;
+	padding: 10px 32px 10px;
+	margin: 0;
+}
+
+.logo {
+	font-family: 'Give You Glory', cursive;
+	z-index: 2;
+}
+
+h1.logo {
+	font-size: 30px;
+	margin: 0px;
+}
+p.logo {
+	font-size: 20px;
+	margin: 0px;
+}
+
+.backHome {
+	text-decoration: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.container {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100vw;
+}
+.row1 {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 75px;
+	justify-content: space-between;
+	width: 100vw;
+}
+
+.title {
+	margin-left: 30px;
+	height: 75px;
+	width: 450px;
+	line-height: 25px;
+}
+
+.aside {
+	display: flex;
+	flex-direction: row;
+
+	align-items: center;
+	justify-content: flex-end;
+	width: 350px;
+	margin-right: 50px;
+}
+.aside > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left: 5px;
+}
+
+img.clock {
+	width: 25px;
+}
+
+p.clock {
+	font-size: small;
+	margin: 0;
+	text-align: center;
+}
+
+img.healthScore {
+	margin-top: 10px;
+	width: 25px;
+}
+
+p.healthScore {
+	font-size: small;
+	margin: 0;
+	text-align: center;
+}
+
+.dishTypes {
+	margin-right: 20px;
+	width: 400px;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: center;
+	justify-content: center;
+}
+
+.dishTypes > div {
+	width: 100px;
+	height: 30px;
+	align-items: center;
+	line-height: 30px;
+	font-size: 12px;
+	border: solid 1px black;
+	border-radius: 10px;
+	margin: 3px;
+	align-content: center;
+	text-align: center;
+}
+
+.row2 {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 800px;
+	justify-content: space-between;
+	width: 100vw;
+}
+
+.summary {
+	width: 60vw;
+}
+
+.summary > :first-child {
+	padding-left: 10px;
+	font-weight: 800;
+}
+
+.summary > :nth-child(2) {
+	font-size: 15px;
+}
+
+.container > img {
+	height: 250px;
+	width: 250px;
+}

@@ -1,0 +1,57 @@
+.canvas {
+	background-color: #fff;
+}
+
+#myVideo {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	width: 100vw;
+}
+
+.content {
+	position: fixed;
+	top: 100px;
+	width: 100%;
+	padding: 20px;
+	text-align: center;
+	color: black;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+.logo {
+	font-family: 'Give You Glory', cursive;
+}
+
+h1.logo {
+	font-size: 50px;
+	margin: 0px;
+}
+p.logo {
+	font-size: 30px;
+	margin: 0px;
+}
+
+a.inButton {
+	text-decoration: none;
+	color: black;
+	font-weight: 500;
+}
+div.inButton {
+	cursor: pointer;
+	margin: 40px;
+	border: 1px black solid;
+	border-radius: 10px;
+	padding: 20px;
+	width: 100px;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	transition: all 300ms ease-in-out;
+}
+
+div.inButton:hover {
+	transform: scale(1.4);
+	transition: all 300ms ease-in-out;
+}

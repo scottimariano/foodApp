@@ -1,0 +1,25 @@
+.cardsCanvas {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.inButton {
+	font-weight: 500;
+	cursor: pointer;
+	margin: 10px;
+	border: 1px black solid;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	transition: all 300ms ease-in-out;
+}
+
+.inButton:hover {
+	transform: scale(1.1);
+	transition: all 300ms ease-in-out;
+}
