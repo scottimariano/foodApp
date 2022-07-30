@@ -112,14 +112,16 @@ const Home = (props) => {
 							<option value="Show All">Show All</option>
 							<option value="gluten free">Gluten Free</option>
 							<option value="vegetarian">Vegetarian</option>
-							<option value="lacto-vegetarian">Lacto-Vegetarian</option>
-							<option value="ovo-vegetarian">Ovo-Vegetarian</option>
+							<option value="lacto ovo vegetarian">
+								Lacto Ovo Vegetarian
+							</option>
 							<option value="vegan">Vegan</option>
-							<option value="pescetarian">Pescetarian</option>
-							<option value="paleo">Paleo</option>
+							<option value="pescatarian">Pescatarian</option>
+							<option value="paleolithic">Paleolithic</option>
 							<option value="primal">Primal</option>
-							<option value="low fodmap">Low FODMAP</option>
-							<option value="whole30">Whole30</option>
+							<option value="fodmap friendly">Fodmap Friendly</option>
+							<option value="whole 30">Whole 30</option>
+							<option value="dairy free">Dairy Free</option>
 							<option value="ketogenic">Ketogenic</option>
 						</select>
 					</div>

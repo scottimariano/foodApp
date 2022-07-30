@@ -8,6 +8,7 @@ import {
 	GET_DIETS,
 	GET_TYPES,
 	SHOW_ALL,
+	CLEAR_RECIPE_DETAIL,
 } from '../actions/index.actions';
 
 const initialState = {
@@ -84,7 +85,7 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				recipesToShow: [
-					...state.recipesToShow.filter((recipe) => {
+					...state.recipes.filter((recipe) => {
 						if (/^\d+(DB)$/g.test(recipe.id)) {
 							return recipe.diets.some(
 								(diet) => diet.name === action.payload
@@ -112,6 +113,12 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				recipesToShow: state.recipes,
+			};
+
+		case CLEAR_RECIPE_DETAIL:
+			return {
+				...state,
+				recipeDetails: [],
 			};
 
 		default:

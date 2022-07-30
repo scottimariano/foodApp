@@ -65,24 +65,25 @@ const Cards = (props) => {
 					<p>No hay recetas para mostrar</p>
 				)}
 			</section>
-			<div className={`${cards.pages}`}>
-				<button
-					id="btnPrevPage"
-					disabled={tooglePrev}
-					className={`${cards.inButton}`}
-					onClick={() => pageBackwards()}>
-					PREV
-				</button>
-
-				<span>{page}</span>
-				<button
-					id="btnNextPage"
-					className={`${cards.inButton}`}
-					disabled={toogleNext}
-					onClick={() => pageForward()}>
-					NEXT
-				</button>
-			</div>
+			{pages > 1 ? (
+				<div className={`${cards.pages}`}>
+					<button
+						id="btnPrevPage"
+						disabled={tooglePrev}
+						className={`${cards.inButton}`}
+						onClick={() => pageBackwards()}>
+						PREV
+					</button>
+					<span>{page}</span>
+					<button
+						id="btnNextPage"
+						className={`${cards.inButton}`}
+						disabled={toogleNext}
+						onClick={() => pageForward()}>
+						NEXT
+					</button>
+				</div>
+			) : null}
 		</>
 	);
 };

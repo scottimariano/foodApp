@@ -5,7 +5,7 @@
 	align-items: flex-start;
 	background-image: url('../../media/vecteezy_kitchen-utensils-tools-and-dishware-on-on-the-background-white-tile-wall_2786411.jpg');
 	background-size: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
@@ -114,6 +114,7 @@ p.logo {
 	height: 50px;
 	width: 150px;
 	font-family: 'Give You Glory', cursive;
+	margin-bottom: 50px;
 }
 
 .button > button > h4 {

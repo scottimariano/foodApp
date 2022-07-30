@@ -10,8 +10,8 @@ const RecipeCard = (props) => {
 			<Link
 				style={{ textDecoration: 'none', color: 'black' }}
 				to={`recipes/${props.id}`}>
-				{props.title.length > 50 ? (
-					<h2>{props.title.slice(0, 50)} ...</h2>
+				{props.title.length > 45 ? (
+					<h2>{props.title.slice(0, 45)} ...</h2>
 				) : (
 					<h2>{props.title}</h2>
 				)}

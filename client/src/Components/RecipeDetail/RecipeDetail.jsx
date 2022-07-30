@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecipeDetail } from '../../Redux/actions/index.actions';
+import {
+	getRecipeDetail,
+	clearRecipeDetail,
+} from '../../Redux/actions/index.actions';
 import recipeDetailclass from '../RecipeDetail/recipeDetail.module.css';
 import clock from '../../media/clipart2085481-2.png';
 import healthScore from '../../media/healthScore.png';
@@ -12,6 +15,7 @@ const RecipeDetail = (props) => {
 
 	useEffect(() => {
 		dispatch(getRecipeDetail(props.match.params.id));
+		return () => dispatch(clearRecipeDetail());
 	}, []);
 
 	return (
@@ -85,36 +89,38 @@ const RecipeDetail = (props) => {
 						</div>
 					</section>
 					<section className={`${recipeDetailclass.row2}`}>
-						<div className={`${recipeDetailclass.summary}`}>
-							<p>Summary:</p>
-							<p
-								dangerouslySetInnerHTML={{
-									__html: recipeDetail.summary,
-								}}></p>
-						</div>
-						<div>
+						<section>
+							<div className={`${recipeDetailclass.summary}`}>
+								<p>Summary:</p>
+								<p
+									dangerouslySetInnerHTML={{
+										__html: recipeDetail.summary,
+									}}></p>
+							</div>
+							<div className={`${recipeDetailclass.summary}`}>
+								<p>Steps:</p>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: recipeDetail.instructions,
+									}}></div>
+							</div>
+						</section>
+						<div className={`${recipeDetailclass.foto}`}>
 							<img src={recipeDetail.image} alt={recipeDetail.title} />
-							<p>Diets:</p>
-							{!recipeDetail.diets ? (
-								<p>No existen dietas asociadas</p>
-							) : /^\d+(DB)$/g.test(recipeDetail.id) ? (
-								recipeDetail.diets.map((diet, index) => (
-									<span key={index}>{diet.name}</span>
-								))
-							) : (
-								recipeDetail.diets.map((diet, index) => (
-									<span key={index}>{diet}</span>
-								))
-							)}
+							<div className={`${recipeDetailclass.dishTypes}`}>
+								{!recipeDetail.diets ? (
+									<p>No existen dietas asociadas</p>
+								) : /^\d+(DB)$/g.test(recipeDetail.id) ? (
+									recipeDetail.diets.map((diet, index) => (
+										<div key={index}>{diet.name}</div>
+									))
+								) : (
+									recipeDetail.diets.map((diet, index) => (
+										<div key={index}>{diet}</div>
+									))
+								)}
+							</div>
 						</div>
-					</section>
-
-					<section>
-						<p>Steps:</p>
-						<div
-							dangerouslySetInnerHTML={{
-								__html: recipeDetail.instructions,
-							}}></div>
 					</section>
 				</section>
 				<Link className={`${recipeDetailclass.backHome}`} to={'/'}>

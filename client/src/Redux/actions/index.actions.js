@@ -8,7 +8,7 @@ export const FILTER_RECIPES = 'FILTER_RECIPES';
 export const GET_DIETS = 'GET_DIETS';
 export const GET_TYPES = 'GET_TYPES';
 export const SHOW_ALL = 'SHOW_ALL';
-
+export const CLEAR_RECIPE_DETAIL = 'CLEAR_RECIPE_DETAIL';
 const axios = require('axios');
 
 export const getAllRecipes = () => {
@@ -81,7 +81,7 @@ export const createRecipe = (input) => {
 export const getAsoc = (input) => {
 	return async function (dispatch) {
 		return axios
-			.get(`/asoc/`, input)
+			.get(`/asoc`, input)
 			.then(
 				(response) => {
 					dispatch({ type: GET_DIETS, payload: response.data[0] });
@@ -98,5 +98,11 @@ export const getAsoc = (input) => {
 export const showAllRecipes = () => {
 	return async function (dispatch) {
 		dispatch({ type: SHOW_ALL });
+	};
+};
+
+export const clearRecipeDetail = () => {
+	return async function (dispatch) {
+		dispatch({ type: CLEAR_RECIPE_DETAIL });
 	};
 };

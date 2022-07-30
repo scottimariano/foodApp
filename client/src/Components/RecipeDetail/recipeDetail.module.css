@@ -7,10 +7,11 @@
 	background-size: 100vw;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	min-height: 100vh;
 }
 
 .container > section {
-	border: solid red 1px;
+	width: 98vw;
 }
 
 .navBar {
@@ -20,7 +21,6 @@
 	align-items: center;
 	width: 95vw;
 	padding: 10px 32px 10px;
-	margin: 0;
 }
 
 .logo {
@@ -55,7 +55,7 @@ p.logo {
 .container {
 	display: flex;
 	flex-flow: column nowrap;
-	width: 100vw;
+	width: 90vw;
 }
 .row1 {
 	display: flex;
@@ -129,12 +129,13 @@ p.healthScore {
 	margin: 3px;
 	align-content: center;
 	text-align: center;
+	background-color: #fff;
 }
 
 .row2 {
 	display: flex;
 	flex-flow: row nowrap;
-	height: 800px;
+	height: 400px;
 	justify-content: space-between;
 	width: 100vw;
 }
@@ -150,9 +151,23 @@ p.healthScore {
 
 .summary > :nth-child(2) {
 	font-size: 15px;
+	margin-left: 15px;
+	margin-right: 20px;
+	text-align: justify;
 }
 
-.container > img {
+.foto {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	width: 450px;
+}
+
+.foto > img {
+	margin-top: 25px;
 	height: 250px;
-	width: 250px;
+	width: 350px;
+	object-fit: contain;
+	object-position: 0 0;
+	border-radius: 20px;
 }

@@ -15,7 +15,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get('', async (req, res) => {
+router.get('/', async (req, res) => {
 	let allRecipes = [];
 	try {
 		Promise.all([
@@ -270,13 +270,13 @@ router.get('/asoc', async (req, res) => {
 			'gluten free',
 			'vegetarian',
 			'ketogenic',
-			'lacto-vegetarian',
-			'ovo-vegetarian',
+			'lacto ovo vegetarian',
 			'vegan',
 			'pescatarian',
 			'paleolithic',
 			'primal',
-			'low fodmap',
+			'dairy free',
+			'fodmap friendly',
 			'whole30',
 		];
 
