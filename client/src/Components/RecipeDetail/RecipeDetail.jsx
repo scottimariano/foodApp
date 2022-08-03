@@ -18,6 +18,7 @@ const RecipeDetail = (props) => {
 	useEffect(() => {
 		dispatch(getRecipeDetail(props.match.params.id));
 		return () => dispatch(clearRecipeDetail());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	function handleDelete() {
