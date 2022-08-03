@@ -26,7 +26,9 @@ const Landing = (props) => {
 						<p>Loading...</p>
 					) : (
 						<Link className="inButton" to="/">
-							<div className="inButton">LET'S COOK</div>
+							<div id="inButton" className="inButton">
+								LET'S COOK
+							</div>
 						</Link>
 					)}
 				</div>

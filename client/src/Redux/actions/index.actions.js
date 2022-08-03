@@ -9,6 +9,8 @@ export const GET_DIETS = 'GET_DIETS';
 export const GET_TYPES = 'GET_TYPES';
 export const SHOW_ALL = 'SHOW_ALL';
 export const CLEAR_RECIPE_DETAIL = 'CLEAR_RECIPE_DETAIL';
+export const DELETE_RECIPE = 'DELETE_RECIPE';
+
 const axios = require('axios');
 
 export const getAllRecipes = () => {
@@ -104,5 +106,20 @@ export const showAllRecipes = () => {
 export const clearRecipeDetail = () => {
 	return async function (dispatch) {
 		dispatch({ type: CLEAR_RECIPE_DETAIL });
+	};
+};
+
+export const deleteRecipe = (id) => {
+	return async function (dispatch) {
+		return axios
+			.delete(`/recipes/${id}`)
+			.then((response) => {
+				dispatch({ type: DELETE_RECIPE, payload: response.data });
+				alert(response.data);
+				dispatch(getAllRecipes());
+			})
+			.catch((e) => {
+				alert(e.message);
+			});
 	};
 };

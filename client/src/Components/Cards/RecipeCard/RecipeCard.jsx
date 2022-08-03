@@ -41,13 +41,14 @@ const RecipeCard = (props) => {
 						</p>
 					</aside>
 				</div>
+				<p className={`${recipeCard.dietsTitle}`}>Diets:</p>
 				<div className={`${recipeCard.diets}`}>
 					{!props.diets ? (
-						<p>No existen dietas asociadas</p>
+						<p>There is no diets associated</p>
 					) : /^\d+(DB)$/g.test(props.id) ? (
 						props.diets.map((diet, index) => (
 							<div className={`${recipeCard.diet}`} key={index}>
-								{diet.name}
+								<span>{diet.name}</span>
 							</div>
 						))
 					) : (

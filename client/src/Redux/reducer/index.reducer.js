@@ -95,7 +95,6 @@ const rootReducer = (state = initialState, action) => {
 						}
 					}),
 				],
-				sort: action.payload.sort,
 			};
 
 		case GET_DIETS:

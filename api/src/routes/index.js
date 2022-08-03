@@ -7,6 +7,8 @@ const { API_KEY } = process.env; //hacemos destructuring para asignarsela a la v
 const { Op, Recipe, Diet, DishType } = require('../db.js'); // Importamos los modelos de la BD para poder utilizarlo
 
 const { shortenResponse, propsToDiets } = require('../utils');
+const e = require('express');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -17,66 +19,64 @@ const router = Router();
 
 router.get('/', async (req, res) => {
 	let allRecipes = [];
-	try {
-		Promise.all([
-			//Cargar recetas APi
-			axios
-				.get(
-					`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
-				)
-				.then((response) => {
-					let shortResponse = response.data.results.map((recipe) => {
-						propsToDiets(recipe);
-						return shortenResponse(recipe);
-					});
-					return shortResponse;
-				})
-				.catch((error) => {
-					console.log(
-						'Error en la obtencion de datos de la API: ' + error.message
-					);
-					return [];
-				}),
-			//Cargar recetas DB
-			Recipe.findAll({
-				include: [
-					{
-						model: Diet,
-						attributes: ['name'],
-						through: {
-							attributes: [],
-						},
-					},
-					{
-						model: DishType,
-						attributes: ['name'],
-						through: {
-							attributes: [],
-						},
-					},
-				],
+	Promise.all([
+		//Cargar recetas APi
+		axios
+			.get(
+				`1https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+			)
+			.then((response) => {
+				let shortResponse = response.data.results.map((recipe) => {
+					propsToDiets(recipe);
+					return shortenResponse(recipe);
+				});
+				return shortResponse;
 			})
-				.then((response) => {
-					return response;
-				})
-				.catch((error) => {
-					console.log(
-						'Error en la obtencion de datos de la BD: ' + error.message
-					);
-					return [];
-				}),
-		]).then((response) => {
+			.catch((error) => {
+				console.log(
+					'Error en la obtencion de datos de la API: ' + error.message
+				);
+				return [];
+			}),
+		//Cargar recetas DB
+		Recipe.findAll({
+			include: [
+				{
+					model: Diet,
+					attributes: ['name'],
+					through: {
+						attributes: [],
+					},
+				},
+				{
+					model: DishType,
+					attributes: ['name'],
+					through: {
+						attributes: [],
+					},
+				},
+			],
+		})
+			.then((response) => {
+				return response;
+			})
+			.catch((error) => {
+				console.log(
+					'Error en la obtencion de datos de la BD: ' + error.message
+				);
+				return [];
+			}),
+	]).then(
+		(response) => {
 			allRecipes = [...response[0], ...response[1]];
 			allRecipes.sort((a, b) => {
 				// ordena alfabeticamente todas las recetas.
-
 				return a.title.toLowerCase() <= b.title.toLowerCase() ? -1 : 1;
 			});
 			res.send(allRecipes);
-		});
-	} catch (error) {
-		res.send(error.message);
-	}
+		},
+		(error) => res.send(404).send(error.message)
+	);
 });
 
 // Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
@@ -89,7 +89,7 @@ router.get('/recipes', async (req, res) => {
 			// busqueda de los datos desde la api
 			axios
 				.get(
-					`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=5&titleMatch=${name}`
+					`1https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=5&titleMatch=${name}`
 				)
 				.then((response) => {
 					let shortResponse = response.data.results.map((recipe) => {
@@ -187,7 +187,9 @@ router.get('/recipes/:id', async (req, res) => {
 			},
 		})
 			.then((response) => {
-				return res.send(response);
+				!response
+					? res.status(404).send('Recipe Not found')
+					: res.send(response);
 			})
 			.catch((error) => {
 				return res
@@ -215,6 +217,7 @@ router.get('/recipes/:id', async (req, res) => {
 
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 router.post('/recipes', async (req, res) => {
+	console.log(req.body);
 	let {
 		title,
 		image,
@@ -226,13 +229,11 @@ router.post('/recipes', async (req, res) => {
 		readyInMinutes,
 	} = req.body;
 	try {
-		if (!title || !summary) {
-			return res.status(404).send('Falta enviar datos obligatorios');
+		if (!title && !summary) {
+			return res
+				.status(404)
+				.send('Creating new recipe requires title and summary');
 		} else {
-			if (image === '') {
-				image =
-					'https://img.favpng.com/2/19/19/recipe-soup-chef-cooking-clip-art-png-favpng-Geqqry8pxNWaJc0CaAm4b38sM_t.jpg';
-			}
 			const newRecipe = await Recipe.create({
 				title,
 				image,
@@ -242,21 +243,24 @@ router.post('/recipes', async (req, res) => {
 				readyInMinutes,
 			});
 
-			if (diets && diets.length > 0) {
-				let dietsToPromises = diets.map(async (d) => {
-					let dietToAdd = await Diet.findOne({ where: { name: d } });
-					dietToAdd.addRecipe(newRecipe);
+			if (diets.length > 0) {
+				const dietsToPromises = await Diet.findAll({
+					where: { name: { [Op.or]: diets } },
 				});
-				await Promise.all(dietsToPromises);
+				await newRecipe.addDiets(dietsToPromises);
 			}
-			if (dishTypes && dishTypes.length > 0) {
-				let typesToPromises = dishTypes.map(async (t) => {
-					let typeToAdd = await DishType.findOne({ where: { name: t } });
-					typeToAdd.addRecipe(newRecipe);
+			if (dishTypes.length > 0) {
+				const typesToPromises = await DishType.findAll({
+					where: { name: { [Op.or]: dishTypes } },
 				});
-				await Promise.all(typesToPromises);
+				await newRecipe.addDishTypes(typesToPromises);
+				// let typesToPromises = dishTypes.map(async (t) => {
+				// 	let typeToAdd = await DishType.findOne({ where: { name: t } });
+				// 	typeToAdd.addRecipe(newRecipe);
+				// });
+				// await Promise.all(typesToPromises);
 			}
-			return res.status(201).send('La receta fue creada satisfactoriamente');
+			return res.status(201).send('Recipe was succesfully created');
 		}
 	} catch (error) {
 		return res.status(404).send(error.message);
@@ -315,9 +319,84 @@ router.get('/asoc', async (req, res) => {
 	}
 
 	return Promise.all([loadDiets(), loadTypes()]).then(
-		(response) => res.send(response),
+		(response) => {
+			console.log('Diets y types loaded OK');
+			return res.send(response);
+		},
 		(e) => res.status(404).send(e.message)
 	);
 });
+
+router.delete('/recipes/:id', async (req, res) => {
+	const { id } = req.params;
+	Recipe.findOne({
+		where: {
+			key: {
+				[Op.eq]: parseInt(id.split('DB')[0]),
+			},
+		},
+	})
+		.then((response) => {
+			if (response) {
+				response.destroy().then((r) => {
+					res.send(`Se ha borrado la receta con ID: ${id}`);
+				});
+			} else {
+				res.status(404).send(`No se ha encontrado la receta con ID: ${id}`);
+			}
+		})
+		.catch((e) => console.log(e.message));
+});
+
+// router.put('/recipes/:id', async (req, res) => {
+// 	const { id } = req.params;
+// 	let {
+// 		title,
+// 		image,
+// 		diets,
+// 		dishTypes,
+// 		summary,
+// 		healthScore,
+// 		instructions,
+// 		readyInMinutes,
+// 	} = req.body;
+
+// 	Recipe.findOne({
+// 		where: {
+// 			key: {
+// 				[Op.eq]: parseInt(id.split('DB')[0]),
+// 			},
+// 		},
+// 	})
+// 		.then((response) => {
+// 			response.set({
+// 				title,
+// 				image,
+// 				summary,
+// 				healthScore,
+// 				instructions,
+// 				readyInMinutes,
+// 			});
+
+// 			response.save().then((response) => {
+// 				const recipeUpdated = response;
+// 				Promise.all([
+// 					Diet.findAll({
+// 						where: { name: { [Op.or]: diets } },
+// 					}).then((response) => recipeUpdated.setDiets(response)),
+// 					DishType.findAll({
+// 						where: { name: { [Op.or]: dishTypes } },
+// 					}).then((response) => recipeUpdated.setDishTypes(response)),
+// 				]);
+// 			});
+// 		})
+// 		.then(() => res.send('Receta modificada exitosamente'))
+
+// 		.catch((e) =>
+// 			res
+// 				.status(404)
+// 				.send('Ha ocurrido un error al intentar actualizar ' + e.message)
+// 		);
+//});
 
 module.exports = router;

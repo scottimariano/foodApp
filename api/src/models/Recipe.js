@@ -24,7 +24,13 @@ module.exports = (sequelize) => {
 			},
 			image: {
 				type: DataTypes.STRING,
-				allowNull: true,
+				set(val) {
+					this.setDataValue(
+						'image',
+						val ||
+							'https://img.freepik.com/vector-premium/logotipo-mascota-chef_138200-20.jpg?w=200'
+					);
+				},
 			},
 			summary: {
 				type: DataTypes.TEXT,

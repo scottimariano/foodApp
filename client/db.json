@@ -1,0 +1,31 @@
+{
+	"diets": [
+		"gluten free",
+		"vegetarian",
+		"ketogenic",
+		"lacto ovo vegetarian",
+		"vegan",
+		"pescatarian",
+		"paleolithic",
+		"primal",
+		"dairy free",
+		"fodmap friendly",
+		"whole30"
+	],
+	"dishTypes": [
+		"main course",
+		"side dish",
+		"dessert",
+		"appetizer",
+		"salad",
+		"bread",
+		"breakfast",
+		"soup",
+		"beverage",
+		"sauce",
+		"marinade",
+		"fingerfood",
+		"snack",
+		"drink"
+	]
+}

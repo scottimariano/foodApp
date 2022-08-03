@@ -88,7 +88,7 @@ const CreateRecipe = () => {
 		let response = input;
 		response.diets = dietsTemp;
 		response.dishTypes = dishTypesTemp;
-		dispatch(createRecipe(input));
+		dispatch(createRecipe(response));
 		setInput({
 			title: '',
 			image: '',
@@ -137,6 +137,7 @@ const CreateRecipe = () => {
 							<input
 								name="title"
 								value={input.title}
+								required
 								onChange={handleChangeForm}
 								onBlur={handleChangeForm}></input>
 							<label>Summary: </label>
@@ -151,6 +152,7 @@ const CreateRecipe = () => {
 								name="summary"
 								cols="30"
 								rows="10"
+								required
 								value={input.summary}
 								onChange={handleChangeForm}
 								onBlur={handleChangeForm}></textarea>
