@@ -74,7 +74,7 @@ const Home = (props) => {
 						<input
 							className={`${home.inButton}`}
 							type="submit"
-							value="BUSCAR"
+							value="SEARCH"
 						/>
 					</form>
 					<button
