@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 		//Cargar recetas APi
 		axios
 			.get(
-				`1https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
+				`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
 			)
 			.then((response) => {
 				let shortResponse = response.data.results.map((recipe) => {
@@ -89,7 +89,7 @@ router.get('/recipes', async (req, res) => {
 			// busqueda de los datos desde la api
 			axios
 				.get(
-					`1https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=5&titleMatch=${name}`
+					`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=5&titleMatch=${name}`
 				)
 				.then((response) => {
 					let shortResponse = response.data.results.map((recipe) => {
