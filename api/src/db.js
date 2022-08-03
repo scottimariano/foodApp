@@ -70,6 +70,48 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Recipe, Diet, DishType } = sequelize.models;
 
 //cargamos las dietas en una primera instancia:
+const diets = [
+	'gluten free',
+	'vegetarian',
+	'ketogenic',
+	'lacto ovo vegetarian',
+	'vegan',
+	'pescatarian',
+	'paleolithic',
+	'primal',
+	'dairy free',
+	'fodmap friendly',
+	'whole30',
+];
+
+diets.map((d) =>
+	Diet.findOrCreate({
+		where: { name: d },
+	})
+);
+
+const types = [
+	'main course',
+	'side dish',
+	'dessert',
+	'appetizer',
+	'salad',
+	'bread',
+	'breakfast',
+	'soup',
+	'beverage',
+	'sauce',
+	'marinade',
+	'fingerfood',
+	'snack',
+	'drink',
+];
+
+types.map((d) =>
+	DishType.findOrCreate({
+		where: { name: d },
+	})
+);
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
