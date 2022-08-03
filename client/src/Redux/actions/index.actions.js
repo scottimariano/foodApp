@@ -75,7 +75,6 @@ export const createRecipe = (input) => {
 			(error) => {
 				alert(error.response.data);
 			}
-			//REDIRIGIR AL HOME
 		);
 	};
 };
