@@ -13,12 +13,10 @@ axios.defaults.baseURL = process.env.REACT_APP_URL || 'http://localhost:3001';
 //axios.defaults.baseURL = 'http://localhost:3001';
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</Provider>
-	</React.StrictMode>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>,
 	document.getElementById('root')
 );
