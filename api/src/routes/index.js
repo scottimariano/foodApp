@@ -217,7 +217,7 @@ router.get('/recipes/:id', async (req, res) => {
 
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
 router.post('/recipes', async (req, res) => {
-	console.log(req.body);
+	//console.log(req.body);
 	let {
 		title,
 		image,

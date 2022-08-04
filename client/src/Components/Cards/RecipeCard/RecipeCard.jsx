@@ -41,7 +41,7 @@ const RecipeCard = (props) => {
 						</p>
 					</aside>
 				</div>
-				<p className={`${recipeCard.dietsTitle}`}>Diets:</p>
+				<div className={`${recipeCard.dietsTitle}`}>Diets:</div>
 				<div className={`${recipeCard.diets}`}>
 					{!props.diets ? (
 						<p>There is no diets associated</p>

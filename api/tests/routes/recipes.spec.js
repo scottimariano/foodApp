@@ -6,6 +6,8 @@ const request = require('supertest');
 const recipe = {
 	title: 'Milanesa a la napolitana',
 	summary: 'test',
+	diets: ['vegan', 'dairy free'],
+	dishTypes: [],
 };
 
 describe('Recipes Routes', () => {
@@ -34,6 +36,7 @@ describe('Asociations Routes', () => {
 		title: 'Milanesa a la napolitana',
 		summary: 'test',
 		diets: ['vegan', 'dairy free'],
+		dishTypes: [],
 	};
 	before(async () => {
 		await Recipe.sync({ force: true });

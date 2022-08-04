@@ -77,12 +77,14 @@ p.healthScore {
 }
 
 .diets {
-	margin: 20px 0 0 0;
+	margin: 5px 0 0 0;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-around;
 }
-
+.dietsTitle {
+	margin-top: 10px;
+}
 .click {
 	width: 150px;
 	height: 30px;
