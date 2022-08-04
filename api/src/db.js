@@ -85,7 +85,7 @@ const diets = [
 ];
 
 diets.map((d) =>
-	Diet.findOrCreate({
+	Diet.create({
 		where: { name: d },
 	})
 );
@@ -108,7 +108,7 @@ const types = [
 ];
 
 types.map((d) =>
-	DishType.findOrCreate({
+	DishType.create({
 		where: { name: d },
 	})
 );
