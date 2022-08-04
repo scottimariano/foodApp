@@ -70,57 +70,51 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Recipe, Diet, DishType } = sequelize.models;
 
 //cargamos las dietas en una primera instancia:
-async function loadDiets() {
-	const diets = [
-		'gluten free',
-		'vegetarian',
-		'ketogenic',
-		'lacto ovo vegetarian',
-		'vegan',
-		'pescatarian',
-		'paleolithic',
-		'primal',
-		'dairy free',
-		'fodmap friendly',
-		'whole30',
-	];
 
-	diets.map((d) =>
-		Diet.build({
+const diets = [
+	'gluten free',
+	'vegetarian',
+	'ketogenic',
+	'lacto ovo vegetarian',
+	'vegan',
+	'pescatarian',
+	'paleolithic',
+	'primal',
+	'dairy free',
+	'fodmap friendly',
+	'whole30',
+];
+
+const types = [
+	'main course',
+	'side dish',
+	'dessert',
+	'appetizer',
+	'salad',
+	'bread',
+	'breakfast',
+	'soup',
+	'beverage',
+	'sauce',
+	'marinade',
+	'fingerfood',
+	'snack',
+	'drink',
+];
+
+Promise.all(
+	diets.map((d) => {
+		Diet.findOrCreate({
 			where: { name: d },
-		})
-	);
-	return Promise.all(diets);
-}
-
-async function loadTypes() {
-	const types = [
-		'main course',
-		'side dish',
-		'dessert',
-		'appetizer',
-		'salad',
-		'bread',
-		'breakfast',
-		'soup',
-		'beverage',
-		'sauce',
-		'marinade',
-		'fingerfood',
-		'snack',
-		'drink',
-	];
-
+		});
+	}),
 	types.map((d) =>
-		DishType.build({
+		DishType.findOrCreate({
 			where: { name: d },
 		})
-	);
-	return Promise.all(types);
-}
-
-Promise.all([loadDiets(), loadTypes()]).then(
-	(response) => {
+	)
+).then(
+	() => {
 		console.log('Diets y types loaded OK');
 	},
 	(e) => console.log(e.message)

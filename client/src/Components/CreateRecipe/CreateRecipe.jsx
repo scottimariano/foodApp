@@ -223,8 +223,8 @@ const CreateRecipe = () => {
 										handleChangeForm(e);
 									}}>
 									{diets.map((d, index) => (
-										<option key={index} value={d}>
-											{d}
+										<option key={index} value={d.name}>
+											{d.name}
 										</option>
 									))}
 								</select>
@@ -247,8 +247,8 @@ const CreateRecipe = () => {
 										handleChangeForm(e);
 									}}>
 									{dishTypes.map((d, index) => (
-										<option key={index} value={d}>
-											{d}
+										<option key={index} value={d.name}>
+											{d.name}
 										</option>
 									))}
 								</select>

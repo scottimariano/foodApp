@@ -85,6 +85,8 @@ export const getAsoc = (input) => {
 			.get(`/asoc`, input)
 			.then(
 				(response) => {
+					console.log(response.data[0]);
+					console.log(response.data[1]);
 					dispatch({ type: GET_DIETS, payload: response.data[0] });
 					dispatch({ type: GET_TYPES, payload: response.data[1] });
 				},
