@@ -86,7 +86,7 @@ async function loadDiets() {
 	];
 
 	diets.map((d) =>
-		Diet.findOrCreate({
+		Diet.build({
 			where: { name: d },
 		})
 	);
@@ -112,7 +112,7 @@ async function loadTypes() {
 	];
 
 	types.map((d) =>
-		DishType.findOrCreate({
+		DishType.build({
 			where: { name: d },
 		})
 	);
