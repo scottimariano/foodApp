@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Route } from 'react-router-dom';
 import './App.css';
 import Landing from './Components/Landing/Landing';

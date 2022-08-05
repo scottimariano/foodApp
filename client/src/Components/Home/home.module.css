@@ -3,10 +3,12 @@
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-	background-image: url('../../media/vecteezy_kitchen-utensils-tools-and-dishware-on-on-the-background-white-tile-wall_2786411.jpg');
-	background-size: 100vw;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background: url('../../media/vecteezy_kitchen-utensils-tools-and-dishware-on-on-the-background-white-tile-wall_2786411.jpg')
+		no-repeat fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	min-height: 100vh;
 }
 
@@ -38,9 +40,6 @@ p.logo {
 .searchBar {
 	display: flex;
 	flex-flow: row nowrap;
-}
-
-.filters {
 }
 
 .inButton {

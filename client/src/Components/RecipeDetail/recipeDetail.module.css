@@ -1,14 +1,22 @@
 .canvas {
-	background-color: #fff;
+	/* background-color: #fff; */
 	display: flex;
 	flex-flow: column;
 	align-items: flex-start;
-	background-image: url('../../media/vecteezy_kitchen-utensils-tools-and-dishware-on-on-the-background-white-tile-wall_2786411.jpg');
-	background-size: 100vw;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	min-height: 100vh;
-	height: 120vh;
+
+	background: url('../../media/vecteezy_kitchen-utensils-tools-and-dishware-on-on-the-background-white-tile-wall_2786411.jpg')
+		no-repeat fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100vh;
+}
+
+.container {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 90vw;
 }
 
 .container > section {
@@ -38,26 +46,6 @@ p.logo {
 	margin: 0px;
 }
 
-.backHome {
-	text-decoration: none;
-	position: fixed;
-	bottom: 20px;
-	right: 30px;
-	z-index: 99;
-	font-size: 18px;
-	border: none;
-	background-color: black;
-	color: white;
-	cursor: pointer;
-	padding: 15px;
-	border-radius: 10px;
-}
-
-.container {
-	display: flex;
-	flex-flow: column nowrap;
-	width: 90vw;
-}
 .row1 {
 	display: flex;
 	flex-flow: row nowrap;
@@ -121,18 +109,53 @@ p.healthScore {
 
 .dishTypes > div {
 	width: 100px;
-	height: 30px;
+	height: 35px;
 	align-items: center;
 	line-height: 30px;
 	font-size: 12px;
-	border: solid 1px black;
 	border-radius: 10px;
 	margin: 3px;
 	align-content: center;
 	text-align: center;
-	background-color: #fff;
+	background-color: steelblue;
 }
 
+.dishTypes > div > span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 15px;
+	color: white;
+}
+
+.diets {
+	margin-right: 20px;
+	width: 400px;
+	display: flex;
+	flex-flow: row wrap;
+	align-content: center;
+	justify-content: center;
+}
+
+.diets > div {
+	width: 100px;
+	height: 35px;
+	align-items: center;
+	line-height: 30px;
+	font-size: 12px;
+
+	border-radius: 10px;
+	margin: 3px;
+	align-content: center;
+	text-align: center;
+	background-color: darkcyan;
+}
+
+.diets > div > span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 15px;
+	color: white;
+}
 .row2 {
 	display: flex;
 	flex-flow: row nowrap;
@@ -155,6 +178,9 @@ p.healthScore {
 	margin-left: 15px;
 	margin-right: 20px;
 	text-align: justify;
+	max-height: 160px;
+	overflow: auto;
+	padding-right: 10px;
 }
 
 .foto {
@@ -178,13 +204,30 @@ p.healthScore {
 	text-decoration: none;
 	text-align: center;
 	width: 80px;
-	margin-left: 30px;
-	margin-bottom: 30px;
 	font-size: 12px;
 	border: none;
 	background-color: red;
 	color: white;
 	cursor: pointer;
 	padding: 5px;
+	border-radius: 10px;
+	bottom: 20px;
+	right: 300px;
+	z-index: 99;
+	position: fixed;
+}
+
+.backHome {
+	text-decoration: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
 	border-radius: 10px;
 }
