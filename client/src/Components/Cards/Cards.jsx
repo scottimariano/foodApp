@@ -42,11 +42,16 @@ const Cards = (props) => {
 
 	function pageForward() {
 		setPage((page) => page + 1);
+		scrollTop();
 	}
 	function pageBackwards() {
 		setPage((page) => page - 1);
+		scrollTop();
 	}
-
+	function scrollTop() {
+		document.body.scrollTop = 0; // For Safari
+		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	}
 	return (
 		<>
 			<section className={`${cards.cardsCanvas}`}>
@@ -63,7 +68,10 @@ const Cards = (props) => {
 						/>
 					))
 				) : (
-					<p>No hay recetas para mostrar</p>
+					<div className={cards.contenedor}>
+						<span className={cards.loader}></span>
+						<h3 className={cards.loading}>Loading...</h3>
+					</div>
 				)}
 			</section>
 			{pages > 1 ? (

@@ -141,9 +141,7 @@ router.get('/recipes', async (req, res) => {
 				if (!response[0].length && !response[1].length) {
 					return res
 						.status(404)
-						.send(
-							'No se encontraron recetas que contengan el texto buscado'
-						);
+						.send(`We couldn't find recipes with the title given`);
 				}
 
 				filteredRecipes = [...response[0], ...response[1]];
@@ -211,7 +209,7 @@ router.get('/recipes/:id', async (req, res) => {
 					.send('Error en la obtencion de datos de la API');
 			});
 	} else {
-		return res.status(404).send('Revise los parametros de busqueda');
+		return res.status(404).send('Check your search params');
 	}
 });
 
@@ -287,10 +285,11 @@ router.delete('/recipes/:id', async (req, res) => {
 		.then((response) => {
 			if (response) {
 				response.destroy().then((r) => {
-					res.send(`Se ha borrado la receta con ID: ${id}`);
+					res.send(`Recipe ID: ${id} was successfully deleted`);
 				});
 			} else {
-				res.status(404).send(`No se ha encontrado la receta con ID: ${id}`);
+				res.status(404).send(`
+				We couldn't find the recipe with ID: ${id}`);
 			}
 		})
 		.catch((e) => console.log(e.message));

@@ -42,7 +42,10 @@ const RecipeDetail = (props) => {
 				</Link>
 			</section>
 			{!recipeDetail.title ? (
-				<h2>Cargando...</h2>
+				<div className={recipeDetailclass.contenedor}>
+					<span className={recipeDetailclass.loader}></span>
+					<h3 className={recipeDetailclass.loading}>Loading...</h3>
+				</div>
 			) : (
 				<>
 					<section className={`${recipeDetailclass.container}`}>
