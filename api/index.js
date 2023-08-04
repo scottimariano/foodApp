@@ -20,9 +20,12 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
-const { PORT } = process.env;
+const { PORT, DB_RESET } = process.env;
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+
+let dbReset = DB_RESET === "true" ? true : false
+
+conn.sync({ force: dbReset }).then(() => {
 	server.listen(PORT, function () {
 		console.log(`Server listening on port ${PORT}`); // eslint-disable-line no-console
 	});

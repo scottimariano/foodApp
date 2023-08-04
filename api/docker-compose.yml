@@ -1,0 +1,19 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./:/app
+      # Anonymous volume:
+      - /app/node_modules
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: foodApp
+    ports:
+      - "5434:5432"
