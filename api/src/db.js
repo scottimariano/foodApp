@@ -2,7 +2,8 @@ require('dotenv').config();
 const { Sequelize, Op } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const { DB_URL } = process.env;
+const { DB_URL, DB_RESET } = process.env;
+
 
 
 const sequelize = new Sequelize(DB_URL)
@@ -69,31 +70,31 @@ const types = [
 	'snack',
 	'drink',
 ];
-
-Promise.all(
-	diets.map((d) => {
-		Diet.findOrCreate({
-			where: { name: d },
-		});
-	}),
-	types.map((d) =>
-		DishType.findOrCreate({
-			where: { name: d },
-		})
-	)
-).then(
-	() => {
-		console.log('Diets y types loaded OK');
-	},
-	(e) => console.log(e.message)
-);
-
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
 Diet.belongsToMany(Recipe, { through: 'recipes_diets' });
 Recipe.belongsToMany(Diet, { through: 'recipes_diets' });
 DishType.belongsToMany(Recipe, { through: 'recipes_types' });
 Recipe.belongsToMany(DishType, { through: 'recipes_types' });
+
+DB_RESET && Promise.all(
+		diets.map((d) => {
+			Diet.findOrCreate({
+				where: { name: d },
+			});
+		}),
+		types.map((d) =>
+			DishType.findOrCreate({
+				where: { name: d },
+			})
+		)
+	).then(
+		() => {
+			console.log('Diets y types loaded OK');
+		},
+		(e) => console.log(e.message)
+	);
+
+// Aca vendrian las relaciones
+// Product.hasMany(Reviews);
 
 module.exports = {
 	...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
