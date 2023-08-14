@@ -75,23 +75,25 @@ Recipe.belongsToMany(Diet, { through: 'recipes_diets' });
 DishType.belongsToMany(Recipe, { through: 'recipes_types' });
 Recipe.belongsToMany(DishType, { through: 'recipes_types' });
 
-DB_RESET && Promise.all(
+if (DB_RESET == "true"){
+	Promise.all(
 		diets.map((d) => {
 			Diet.findOrCreate({
 				where: { name: d },
 			});
 		}),
 		types.map((d) =>
-			DishType.findOrCreate({
-				where: { name: d },
-			})
+		DishType.findOrCreate({
+			where: { name: d },
+		})
 		)
-	).then(
+		).then(
 		() => {
 			console.log('Diets y types loaded OK');
 		},
 		(e) => console.log(e.message)
 	);
+}
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
