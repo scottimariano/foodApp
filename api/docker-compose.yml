@@ -1,6 +1,6 @@
 version: '3'
 services:
-  postgres:
+  lets_cook_db:
     image: postgres
     environment:
       POSTGRES_USER: postgres
@@ -9,7 +9,7 @@ services:
     ports:
       - "5434:5432"
 
-  api:
+  lets_cook_api:
     build: .
     ports:
       - "5001:5001"
@@ -18,4 +18,4 @@ services:
       # Anonymous volume:
       - /app/node_modules
     depends_on:
-      - postgres
+      - lets_cook_db
